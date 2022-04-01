@@ -1,0 +1,29 @@
+<div class="card m-0 p-0">
+    <diV class="card-header border-0" *ngIf="taskList">
+        {{taskList.date | date:'fullDate'}}
+    </diV>
+    <div class="card-body m-0 p-2">
+        <div class="spinner-border" role="status" *ngIf="loading">
+            <span class="sr-only"></span>
+        </div>
+        <div *ngIf="!loading && taskList !== undefined && taskList.tasks.length > 0">
+            <div class="d-flex justify-content-between m-0 p-0" *ngFor="let item of taskList.tasks; let i = index;">
+                <div class="d-flex flex-row align-items-center">
+                    <div class="mr-3">
+                        <input type="checkbox" id="status" name="status" (change)="updateTaskStatus(item)" [ngModel]="item.status === 'COMPLETED'"></div>
+                    <div class="ml-3"><span class="m-0 p-0 text-capitalize">&nbsp; {{item.name}}</span></div>
+                    <div class="ml-3"><span class="m-0 p-0 text-capitalize" [ngClass]="{'text-danger': item.status === 'PENDING', 'text-success': item.status === 'COMPLETED'}">&nbsp; {{item.status}}</span></div>
+                </div>
+                <div class="d-flex flex-row align-items-center">
+                    <button type="button" (click)="edit(item.id)" class="btn btn-sm btn-primary mx-3">Edit</button>
+                    <button type="button" (click)="delete(item.id)" class="btn btn-sm btn-danger">Delete</button>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="!loading && taskList !== undefined && taskList.tasks.length === 0">
+            <div class="d-flex justify-content-between m-0 p-0">
+                <span class="m-0 p-0">No Records</span>
+            </div>
+        </div>
+    </div>
+</div>

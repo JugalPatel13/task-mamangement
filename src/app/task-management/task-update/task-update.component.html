@@ -1,0 +1,32 @@
+<div class="m-0 p-0">
+    <div class="d-flex m-0 p-3 bg-primary">
+        <span class="text-uppercase text-white">{{title + ' task'}}</span>
+    </div>
+    <div class="m-3 p-0">
+        <form class="m-0 p-0" [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+            <div class="d-flex flex-column m-0 my-2 p-0">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" formControlName="name">
+            </div>
+
+            <div class="d-flex flex-column m-0 my-2 p-0">
+                <label for="description">Description</label>
+                <input type="text" id="description" name="description" formControlName="description">
+            </div>
+
+            <div class="d-flex flex-column m-0 my-2 p-0">
+                <label for="dueDate">Due Date</label>
+                <input type="date" id="dueDate" name="dueDate" formControlName="dueDate">
+                <small class="text-danger" *ngIf="taskForm.controls['dueDate'].errors">Due date must be between 1st November 2021 to 7th November 2022</small>
+            </div>
+            <div class="d-flex flex-column m-0 my-2 p-0">
+                <label for="status">Status</label>
+                <input type="text" id="status" name="status" formControlName="status">
+            </div>
+            <div class="d-flex justify-content-end m-0 my-3 p-0">
+                <button type="button" (click)="back()" class="btn btn-secondary mx-3">Back</button>
+                <button type="submit" [disabled]="taskForm.invalid" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
